@@ -1,6 +1,6 @@
 from database import db
 from sqlalchemy import Column, Integer, String
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask_bcrypt import check_password_hash, generate_password_hash
 
 
 class Users(db.Model):
