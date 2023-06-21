@@ -4,7 +4,7 @@ from database import db
 from src.schema.user import user_schema
 from flask_jwt_extended import create_access_token
 from flask import jsonify
-from werkzeug.security import  check_password_hash
+from flask_bcrypt import check_password_hash
 
 user_schema = user_schema(many=True)
 
