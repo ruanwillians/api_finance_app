@@ -3,6 +3,7 @@ from src.controller.expense import expense_bp
 from src.controller.user import user_bp
 from src.controller.categories import category_bp
 from flask_jwt_extended import JWTManager
+from werkzeug.security import safe_str_cmp
 
 
 app = create_app()
@@ -12,9 +13,11 @@ app.register_blueprint(expense_bp)
 app.register_blueprint(user_bp)
 app.register_blueprint(category_bp)
 
+
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
+
 
 if __name__ == '__main__':
     with app.app_context():
