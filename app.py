@@ -3,7 +3,6 @@ from src.controller.expense import expense_bp
 from src.controller.user import user_bp
 from src.controller.categories import category_bp
 from flask_jwt_extended import JWTManager
-from werkzeug.security import safe_str_cmp
 
 
 app = create_app()
