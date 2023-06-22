@@ -9,13 +9,6 @@ class user_service():
         data = repository.get_all()
         return data, 200
 
-    def login(self, data):
-        response = repository.login(data)
-        if "error" in response:
-            return response["error"], 401
-        else:
-            return response, 200
-
     def get_by_id(self, id):
         data = repository.get_by_id(id)
         if "error" in data:

@@ -2,9 +2,6 @@ from database import db
 from src.model.user import Users
 from database import db
 from src.schema.user import user_schema
-from flask_jwt_extended import create_access_token
-from flask import jsonify
-from flask_bcrypt import check_password_hash
 
 user_schema = user_schema(many=True)
 
@@ -30,21 +27,6 @@ class user_repository():
         data = Users.query.all()
         serialized_data = user_schema.dump(data)
         return serialized_data
-
-    def login(self, data):
-        email = data.get('email')
-        password = data.get('password')
-
-        user = Users.query.filter(Users.email == email).first()
-        if not user:
-            return {'error': 'User not found'}
-
-        if not check_password_hash(user.password, password):
-            return {'error': 'Invalid password'}
-
-        access_token = create_access_token(identity=email)
-        print(access_token)
-        return Users.json_token(access_token)
 
     def get_by_id(self, id):
         data = Users.query.filter_by(id=id).first()
