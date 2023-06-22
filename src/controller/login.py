@@ -7,7 +7,7 @@ login_bp = Blueprint('login_bp', __name__, url_prefix='/login')
 service = login_service()
 
 
-@login_bp.route('/', methods=['POST'])
+@login_bp.route('', methods=['POST'])
 def login():
     data = request.get_json()
     response, status_code = service.login(data)

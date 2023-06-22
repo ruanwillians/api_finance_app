@@ -17,7 +17,7 @@ def get_all_users():
     return response, status_code
 
 
-@user_bp.route('/', methods=['POST'])
+@user_bp.route('', methods=['POST'])
 def create():
     data = request.get_json()
     user, status_code = service.create(data)

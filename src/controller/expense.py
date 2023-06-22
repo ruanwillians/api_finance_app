@@ -4,7 +4,7 @@ from flask import make_response
 from flask_jwt_extended import jwt_required
 
 
-expense_bp = Blueprint('expense_bp', __name__, url_prefix='/expenses')
+expense_bp = Blueprint('expense_bp', __name__, url_prefix='/expense')
 
 service = expenseService()
 
@@ -22,7 +22,7 @@ def get_all_expenses():
     return response, status_code
 
 
-@expense_bp.route('/', methods=['POST'])
+@expense_bp.route('', methods=['POST'])
 @jwt_required()
 def create():
     data = request.get_json()

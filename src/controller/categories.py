@@ -18,7 +18,7 @@ def get_all_users():
     return response, status_code
 
 
-@category_bp.route('/', methods=['POST'])
+@category_bp.route('', methods=['POST'])
 @jwt_required()
 def create():
     data = request.get_json()
