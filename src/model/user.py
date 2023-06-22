@@ -32,7 +32,10 @@ class Users(db.Model):
             'balance': self.balance
         }
 
-    def json_token(token):
+    def json_token(self, token):
         return {
-            'token': token
+            'token': token,
+            'email:': self.email,
+            'id': self.id,
+            'name': self.name,
         }

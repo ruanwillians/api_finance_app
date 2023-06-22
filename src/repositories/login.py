@@ -17,4 +17,4 @@ class login_repository():
             return {'error': 'Invalid password'}
 
         access_token = create_access_token(identity=email)
-        return Users.json_token(access_token)
+        return Users.json_token(user, access_token)
