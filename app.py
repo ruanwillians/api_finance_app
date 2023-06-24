@@ -1,5 +1,5 @@
 from database import create_app, db
-from src.controller.expense import expense_bp
+from src.controller.movement import movement_bp
 from src.controller.user import user_bp
 from src.controller.login import login_bp
 from src.controller.categories import category_bp
@@ -11,7 +11,7 @@ app = create_app()
 CORS(app)
 jwt = JWTManager(app)
 app.config['JWT_SECRET_KEY'] = "senha"
-app.register_blueprint(expense_bp)
+app.register_blueprint(movement_bp)
 app.register_blueprint(user_bp)
 app.register_blueprint(login_bp)
 app.register_blueprint(category_bp)

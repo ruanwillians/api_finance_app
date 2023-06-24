@@ -6,6 +6,7 @@ class user_schema(Schema):
     balance = fields.Float()
     name = fields.String()
     email = fields.String()
+    available = fields.Float()
 
 
 class Meta:

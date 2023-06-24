@@ -17,9 +17,10 @@ class user_repository():
         email = data['email']
         password = data['password']
         name = data['name']
+        available = data['available']
 
         item = Users(balance=balance,
-                     email=email, password=password, name=name)
+                     email=email, password=password, name=name, available=available)
 
         return item
 
@@ -31,7 +32,7 @@ class user_repository():
     def get_by_id(self, id):
         data = Users.query.filter_by(id=id).first()
         if not data:
-            return {'error': 'User not found'}
+            return {'error': 'User not found'}, 404
         else:
             serialized_data = Users.json(data)
             return serialized_data
@@ -59,6 +60,8 @@ class user_repository():
                 user.email = data['email']
             if 'name' in data:
                 user.name = data['name']
+            if 'available' in data:
+                user.available = data['available']
 
             self.save(user)
             serialized_data = Users.json(user)
@@ -68,7 +71,7 @@ class user_repository():
         user = Users.query.filter_by(id=id).first()
 
         if not user:
-            return {'error': 'User not found'}
+            return {'error': 'User not found'}, 404
 
         db.session.delete(user)
         db.session.commit()

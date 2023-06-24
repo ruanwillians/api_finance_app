@@ -1,12 +1,13 @@
-from src.repositories.expense import expenseRepository
+from src.repositories.movement import Movement_repository
 
-repository = expenseRepository()
+repository = Movement_repository()
 
 
-class expenseService():
+class Movement_service():
 
-    def get_all(self, user_id, category_id, start_date, end_date):
-        data = repository.get_all(user_id, category_id, start_date, end_date)
+    def get_all(self, user_id, category_id, start_date, end_date, type):
+        data = repository.get_all(
+            user_id, category_id, start_date, end_date, type)
         if "error" in data:
             return data["error"], 404
         else:
@@ -23,15 +24,15 @@ class expenseService():
         data = repository.create(data)
         return data, 201
 
-    def edit_expense(self, id, data):
-        user = repository.edit_expense(id, data)
+    def edit_movement(self, id, data):
+        user = repository.edit_movement(id, data)
         if "error" in data:
             return data["error"], 404
         else:
             return user, 201
 
-    def delete_expense(self, id):
-        data = repository.delete_expense(id)
+    def delete_movement(self, id):
+        data = repository.delete_movement(id)
         if "error" in data:
             return data["error"], 404
         else:
