@@ -2,12 +2,12 @@ from database import db
 from src.model.categories import Categories
 from database import db
 from uuid import uuid4
-from src.schema.categories import category_schema
+from src.schema.categories import Category_schema
 
-category_schema = category_schema(many=True)
+category_schema = Category_schema(many=True)
 
 
-class category_repository():
+class Category_repository():
 
     def save(self, data):
         db.session.add(data)

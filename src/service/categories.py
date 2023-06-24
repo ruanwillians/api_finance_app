@@ -1,9 +1,9 @@
-from src.repositories.categories import category_repository
+from src.repositories.categories import Category_repository
 
-repository = category_repository()
+repository = Category_repository()
 
 
-class category_service():
+class Category_service():
 
     def get_all(self, user_id):
         data = repository.get_all(user_id)

@@ -2,9 +2,13 @@ from database import db
 from src.model.movement import Movement
 from database import db
 from uuid import uuid4
-from src.schema.movement import MovementSchema
+from src.schema.movement import Movement_schema
+from src.model.user import Users
+from src.model.categories import Categories
+from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import IntegrityError
 
-movement_schema = MovementSchema(many=True)
+movement_schema = Movement_schema(many=True)
 
 
 class Movement_repository():
@@ -58,9 +62,24 @@ class Movement_repository():
             return serialized_data
 
     def create(self, data):
-        item = self.generate_item(data)
-        self.save(item)
-        return item
+        user_id = data.get("user_id")
+        category_id = data.get("category_id")
+        try:
+
+            user = Users.query.filter_by(id=user_id).one()
+
+            category = Categories.query.filter_by(
+                id=category_id, user_id=user_id).one()
+
+            item = self.generate_item(data)
+            self.save(item)
+            return Movement.json(item)
+
+        except NoResultFound:
+            return {"error": "User or category not found"}
+
+        except IntegrityError:
+            return {"error": "Foreign key constraint violation"}
 
     def edit_movement(self, id, data):
         movement = Movement.query.filter_by(id=id).first()

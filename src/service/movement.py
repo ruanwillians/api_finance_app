@@ -21,8 +21,11 @@ class Movement_service():
             return data, 200
 
     def create(self, data):
-        data = repository.create(data)
-        return data, 201
+        movement = repository.create(data)
+        if "error" in movement:
+            return movement["error"], 409
+        else:
+            return movement, 201
 
     def edit_movement(self, id, data):
         user = repository.edit_movement(id, data)

@@ -1,10 +1,10 @@
 from flask import Blueprint, request
-from src.service.login import login_service
+from src.service.login import Login_service
 
 
 login_bp = Blueprint('login_bp', __name__, url_prefix='/login')
 
-service = login_service()
+service = Login_service()
 
 
 @login_bp.route('', methods=['POST'])

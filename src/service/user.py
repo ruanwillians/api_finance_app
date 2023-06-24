@@ -3,7 +3,7 @@ from src.repositories.user import user_repository
 repository = user_repository()
 
 
-class user_service():
+class User_service():
 
     def get_all(self):
         data = repository.get_all()

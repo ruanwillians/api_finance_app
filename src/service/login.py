@@ -1,9 +1,9 @@
-from src.repositories.login import login_repository
+from src.repositories.login import Login_repository
 
-repository = login_repository()
+repository = Login_repository()
 
 
-class login_service():
+class Login_service():
 
     def login(self, data):
         response = repository.login(data)

@@ -1,7 +1,7 @@
 from marshmallow import Schema, fields
 
 
-class user_schema(Schema):
+class User_schema(Schema):
     id = fields.Integer()
     balance = fields.Float()
     name = fields.String()

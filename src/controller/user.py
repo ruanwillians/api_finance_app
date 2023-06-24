@@ -1,12 +1,12 @@
 from flask import Blueprint, jsonify, request
-from src.service.user import user_service
+from src.service.user import User_service
 from flask import make_response
 from flask_jwt_extended import create_access_token, jwt_required
 
 
 user_bp = Blueprint('user_bp', __name__, url_prefix='/user')
 
-service = user_service()
+service = User_service()
 
 
 @user_bp.route('/', methods=['GET'])

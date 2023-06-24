@@ -1,9 +1,9 @@
 from database import db
 from src.model.user import Users
 from database import db
-from src.schema.user import user_schema
+from src.schema.user import User_schema
 
-user_schema = user_schema(many=True)
+user_schema = User_schema(many=True)
 
 
 class user_repository():

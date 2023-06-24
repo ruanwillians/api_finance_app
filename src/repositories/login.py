@@ -3,7 +3,7 @@ from flask_jwt_extended import create_access_token
 from werkzeug.security import check_password_hash
 
 
-class login_repository():
+class Login_repository():
 
     def login(self, data):
         email = data.get('email')

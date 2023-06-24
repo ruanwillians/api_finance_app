@@ -1,7 +1,7 @@
 from marshmallow import Schema, fields
 
 
-class MovementSchema(Schema):
+class Movement_schema(Schema):
     id = fields.Integer()
     value = fields.Float()
     description = fields.String()

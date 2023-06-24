@@ -1,12 +1,12 @@
 from flask import Blueprint, jsonify, request
-from src.service.categories import category_service
+from src.service.categories import Category_service
 from flask import make_response
 from flask_jwt_extended import jwt_required
 
 
 category_bp = Blueprint('category_bp', __name__, url_prefix='/category')
 
-service = category_service()
+service = Category_service()
 
 
 @category_bp.route('/', methods=['GET'])
