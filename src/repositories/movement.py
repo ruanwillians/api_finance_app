@@ -63,9 +63,11 @@ class Movement_repository():
 
     def create(self, data):
         user_id = data.get("user_id")
+        if not user_id:
+            return {"error": "User ID is required"}
+
         category_id = data.get("category_id")
         try:
-
             user = Users.query.filter_by(id=user_id).one()
 
             category = Categories.query.filter_by(
@@ -84,22 +86,37 @@ class Movement_repository():
     def edit_movement(self, id, data):
         movement = Movement.query.filter_by(id=id).first()
         if not movement:
-            return {'error': 'User not found'}
-        else:
-            if 'description' in data:
-                movement.description = data['description']
-            if 'date' in data:
-                movement.date = data['date']
-            if 'value' in data:
-                movement.value = data['value']
-            if 'category_id' in data:
-                movement.category_id = data['category_id']
-            if 'type' in data:
-                movement.type = data['type']
+            return {'error': 'Movement not found'}
 
+        if not 'user_id' in data:
+            return {"error": "User ID is required"}
+
+        if 'category_id' in data:
+            category_id = data['category_id']
+            try:
+                category = Categories.query.filter_by(id=category_id).one()
+                if category.user_id != movement.user_id:
+                    return {'error': 'User ID does not match the category'}
+            except NoResultFound:
+                return {'error': 'Category not found'}
+
+        if 'description' in data:
+            movement.description = data['description']
+        if 'date' in data:
+            movement.date = data['date']
+        if 'value' in data:
+            movement.value = data['value']
+        if 'category_id' in data:
+            movement.category_id = data['category_id']
+        if 'type' in data:
+            movement.type = data['type']
+
+        try:
             self.save(movement)
             serialized_data = Movement.json(movement)
             return serialized_data
+        except IntegrityError:
+            return {'error': 'Foreign key constraint violation'}
 
     def delete_movement(self, id):
         movement = Movement.query.filter_by(id=id).first()

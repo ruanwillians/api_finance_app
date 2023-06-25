@@ -29,8 +29,8 @@ class Movement_service():
 
     def edit_movement(self, id, data):
         user = repository.edit_movement(id, data)
-        if "error" in data:
-            return data["error"], 404
+        if "error" in user:
+            return user["error"], 404
         else:
             return user, 201
 

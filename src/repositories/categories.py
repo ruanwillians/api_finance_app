@@ -50,8 +50,15 @@ class Category_repository():
     def edit_category(self, id, data):
         category = Categories.query.filter_by(id=id).first()
         if not category:
-            return {'error': 'User not found'}
+            return {'error': 'Category not found'}
         else:
+            if not 'user_id' in data:
+                return {"error": "User ID is required"}
+
+            user_id = data.get("user_id")
+            if user_id != category.user_id:
+                return {'error': 'User ID does not match the category'}
+
             if 'description' in data:
                 category.description = data['description']
             if 'name' in data:
