@@ -38,7 +38,7 @@ class Users(db.Model):
     def json_token(self, token):
         return {
             'token': token,
-            'email:': self.email,
+            'email': self.email,
             'id': self.id,
             'name': self.name,
             'available': self.available,
